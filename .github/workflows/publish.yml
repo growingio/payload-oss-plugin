@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+      - name: Publish to NPM
+        run: yarn semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}

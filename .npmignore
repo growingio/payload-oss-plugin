@@ -1,0 +1,14 @@
+node_modules
+coverage
+test
+.github
+eslint-config/
+src/
+.editorconfig
+.eslintrc.js
+.gitignore
+.npmignore
+.prettierignore
+.prettierrc.js
+.releaserc.json
+nodemon.json
